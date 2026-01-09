@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Promotion – Flower Knows</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Quicksand',sans-serif;
+}
+
+body{
+    background:url("promo-wallpaper.jpg") center/cover fixed no-repeat;
+    color:#5b0a89;
+    text-align:center;
+}
+
+/* ===== HEADER (SAMA MACAM LIPPIES) ===== */
+header{
+    width:100%;
+    padding:35px 0;
+    background:white;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    position:relative;
+}
+
+header h1{
+    font-family:'Allura',cursive;
+    font-size:90px;
+    color:#b388eb;
+    text-shadow:2px 2px 6px rgba(0,0,0,.25);
+}
+
+/* ===== BACK BUTTON (SAMA MACAM LIPPIES) ===== */
+.back-btn{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    padding:10px 18px;
+    border-radius:25px;
+    border:2px solid #e8c9ff;
+    background:#fff;
+    font-weight:600;
+    cursor:pointer;
+    color:#7a4bd9;
+    transition:.3s;
+}
+.back-btn:hover{
+    background:#f6edff;
+    transform:translateY(-50%) scale(1.05);
+}
+
+/* ===== TICKET ===== */
+.ticket{
+    width:90%;
+    max-width:700px;
+    margin:20px auto;
+    background:#fff0fa;
+    border-radius:25px;
+    padding:25px;
+    border:4px dashed #b40079;
+    box-shadow:0 0 18px rgba(255,150,220,0.6);
+    cursor:pointer;
+    transition:.3s;
+    position:relative;
+}
+
+.ticket:hover{
+    transform:scale(1.04);
+    box-shadow:0 0 28px #ffb3ea;
+}
+
+.ticket h2{
+    font-size:28px;
+    color:#b40079;
+}
+
+.ticket p{
+    font-size:18px;
+}
+
+/* ===== POPUP ===== */
+.floating-bg{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.floating{
+    width:85%;
+    max-width:450px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    animation:pop .3s ease;
+    box-shadow:0 0 20px rgba(255,170,220,.8);
+}
+
+@keyframes pop{
+    from{transform:scale(.6);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+.code-box{
+    background:#b40079;
+    padding:10px 15px;
+    margin:10px 0;
+    border-radius:12px;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.close-btn{
+    margin-top:15px;
+    border:none;
+    padding:10px 20px;
+    background:#f8c8dc;
+    border-radius:20px;
+    color:#5b0a89;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* ===== BUNDLE SECTION ===== */
+.bundle-section h2{
+    margin-top:40px;
+    font-size:60px;
+    color:#ffffff;
+    font-family:'Allura',cursive;
+    text-shadow:2px 2px 8px rgba(0,0,0,.2);
+}
+
+.bundle-grid{
+    width:90%;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:25px;
+}
+
+.bundle-item{
+    background:rgba(255,255,255,.4);
+    border-radius:20px;
+    padding:15px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 0 15px rgba(255,150,225,.6);
+    transition:.3s;
+}
+
+.bundle-item:hover{ transform:scale(1.05); }
+
+.bundle-item img{
+    width:100%;
+    border-radius:15px;
+}
+
+.bundle-item h3{
+    margin-top:10px;
+    font-size:18px;
+    color:#b40079;
+    background:#ffe1f7;
+    padding:8px 12px;
+    border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <span class="back-btn" onclick="location.href='index.html'">← Back</span>
+    <h1>Promotion</h1>
+</header>
+
+<div class="ticket" onclick="openFloating('newUser')">
+    <h2>🌸 New User Promotion</h2>
+    <p>10% OFF for your first purchase</p>
+</div>
+
+<div class="ticket" onclick="openFloating('weekend')">
+    <h2>✨ Weekend Voucher</h2>
+    <p>15% OFF every Saturday & Sunday</p>
+</div>
+
+<div class="floating-bg" id="floatingBg">
+    <div class="floating" id="floatingContent"></div>
+</div>
+
+<div class="bundle-section">
+    <h2>Promotion Bundle</h2>
+
+    <div class="bundle-grid">
+        <div class="bundle-item"><img src="bundle1.jpg"><h3>Patisserie Charm RM350</h3></div>
+        <div class="bundle-item"><img src="bundle2.jpg"><h3>Midsummer Fairy RM209</h3></div>
+        <div class="bundle-item"><img src="bundle3.jpg"><h3>Pinkies PopSlay RM239</h3></div>
+        <div class="bundle-item"><img src="bundle4.jpg"><h3>Swan Grace Sun RM129</h3></div>
+        <div class="bundle-item"><img src="bundle5.jpg"><h3>Angel Embossed RM189</h3></div>
+        <div class="bundle-item"><img src="bundle6.jpg"><h3>Creamy Finish RM119</h3></div>
+    </div>
+</div>
+
+<script>
+function openFloating(type){
+    let content="";
+    if(type==="newUser"){
+        content=`<h2>🌸 New User Promotion</h2>
+        <p>Enjoy <b>10% OFF</b> on your first purchase.</p>
+        <button class='close-btn' onclick='closeFloating()'>Close</button>`;
+    }
+    if(type==="weekend"){
+        content=`<h2>✨ Weekend Voucher</h2>
+        <div class='code-box'>WEEKENDGLOW</div>
+        <button class='close-btn' onclick='closeFloating()'>Close</button>`;
+    }
+    floatingContent.innerHTML=content;
+    floatingBg.style.display="flex";
+}
+function closeFloating(){ floatingBg.style.display="none"; }
+</script>
+
+</body>
+</html>

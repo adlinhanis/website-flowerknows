@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flower Knows – Collaboration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Quicksand',sans-serif;
+}
+
+body{
+  background:url("your-wallpaper.jpg") center/cover fixed no-repeat;
+  color:#9b5de5;
+}
+
+/* ===== BACK BUTTON (SAMA MACAM LIPPIES) ===== */
+.back{
+  position:fixed;
+  top:20px;
+  left:20px;
+  padding:10px 18px;
+  border-radius:25px;
+  border:2px solid #e8c9ff;
+  background:#fff;
+  font-weight:600;
+  cursor:pointer;
+  z-index:10;
+}
+
+/* ===== HEADER ===== */
+header{
+  width:100%;
+  background:white;
+  padding:35px 20px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+header h1{
+  font-family:'Allura',cursive;
+  font-size:80px;
+  color:#b388eb;
+}
+
+/* ===== SECTION ===== */
+.section{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.section h2{
+  font-family:'Allura',cursive;
+  font-size:60px;
+  color:white;
+  text-shadow:0 0 10px pink;
+}
+
+/* ===== BRAND GRID ===== */
+.brand-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  max-width:900px;
+  margin:40px auto;
+  place-items:center;
+}
+
+.brand-grid img{
+  width:70%;
+  border-radius:20px;
+  border:4px solid pink;
+  box-shadow:0 0 15px rgba(255,182,193,.7);
+  cursor:pointer;
+  transition:.3s;
+}
+.brand-grid img:hover{
+  transform:scale(1.08);
+}
+
+/* ===== FORM ===== */
+.form-box{
+  background:rgba(255,255,255,.85);
+  max-width:450px;
+  margin:60px auto;
+  padding:30px;
+  border-radius:25px;
+  border:3px solid pink;
+  box-shadow:0 0 20px rgba(255,192,203,.6);
+}
+
+.form-box h3{
+  font-family:'Allura',cursive;
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:15px;
+  border:2px solid pink;
+  outline:none;
+}
+
+.form-box button{
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:20px;
+  background:pink;
+  font-weight:600;
+  cursor:pointer;
+}
+.form-box button:hover{
+  background:hotpink;
+  color:white;
+}
+
+#submitMessage{
+  margin-top:10px;
+  color:purple;
+  font-weight:600;
+  display:none;
+}
+
+/* ===== CONTACT ===== */
+.contact-list{
+  max-width:400px;
+  margin:40px auto;
+  text-align:left;
+}
+
+.contact-item{
+  display:block;
+  padding:12px 18px;
+  margin-bottom:12px;
+  border-radius:20px;
+  background:rgba(255,255,255,.8);
+  text-decoration:none;
+  color:#7a4bd9;
+  font-weight:600;
+  transition:.3s;
+}
+
+.contact-item span{
+  color:#ff5fb7;
+}
+
+.contact-item:hover{
+  transform:scale(1.05);
+  background:#ffe6f6;
+}
+</style>
+</head>
+
+<body>
+
+<button class="back" onclick="location.href='index.html'">← Back</button>
+
+<header>
+  <h1>Collaboration</h1>
+</header>
+
+<div class="section">
+  <h2>Our Collaborations</h2>
+
+  <div class="brand-grid">
+    <img src="brand1.jpg">
+    <img src="brand2.jpg">
+    <img src="brand3.jpg">
+    <img src="brand4.jpg">
+    <img src="brand5.jpg">
+    <img src="brand6.jpg">
+  </div>
+
+  <div class="form-box">
+    <h3>Collaborate With Us</h3>
+    <input id="colName" placeholder="Your Name">
+    <input id="colEmail" placeholder="Your Email">
+    <textarea id="colMsg" rows="4" placeholder="Tell us about your brand..."></textarea>
+    <button onclick="submitForm()">Submit</button>
+    <div id="submitMessage">Thank you! We’ll contact you soon 💕</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Contact Us</h2>
+
+  <div class="contact-list">
+    <a class="contact-item" href="https://www.instagram.com/flowerknows_global/" target="_blank">
+      📸 Instagram: <span>@flowerknows_global</span>
+    </a>
+
+    <a class="contact-item" href="https://www.tiktok.com/@flowerknowsglobal" target="_blank">
+      🎵 TikTok: <span>@flowerknowsglobal</span>
+    </a>
+
+    <a class="contact-item" href="https://www.youtube.com/@flowerknows" target="_blank">
+      ▶️ YouTube: <span>@flowerknows</span>
+    </a>
+
+    <a class="contact-item" href="https://www.facebook.com/FlowerKnows" target="_blank">
+      📘 Facebook: <span>FlowerKnows</span>
+    </a>
+  </div>
+</div>
+
+<script>
+function submitForm(){
+  document.getElementById("submitMessage").style.display="block";
+  document.getElementById("colName").value="";
+  document.getElementById("colEmail").value="";
+  document.getElementById("colMsg").value="";
+  setTimeout(()=>{
+    document.getElementById("submitMessage").style.display="none";
+  },3000);
+}
+</script>
+
+</body>
+</html>
+

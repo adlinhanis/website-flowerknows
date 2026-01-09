@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Accessories | Flower Knows</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Quicksand',sans-serif;
+}
+
+body{
+  background:url("accessories-wallpaper.jpg") center/cover no-repeat fixed;
+  cursor:url("lipstick-cursor.png"), auto;
+  overflow-x:hidden;
+}
+
+/* ===== HEADER ===== */
+header{
+  width:100%;
+  background:white;
+  padding:35px 20px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+header h1{
+  font-family:'Allura',cursive;
+  font-size:80px;
+  color:#b388eb;
+  text-shadow:2px 2px 6px rgba(0,0,0,.25);
+}
+
+/* ===== BACK ===== */
+.back{
+  position:fixed;
+  top:20px;
+  left:20px;
+  padding:10px 18px;
+  border-radius:25px;
+  border:2px solid #e8c9ff;
+  background:#fff;
+  font-weight:600;
+  cursor:pointer;
+  z-index:10;
+}
+
+/* ===== PRODUCTS ===== */
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+  max-width:900px;
+  margin:40px auto;
+  padding:40px;
+}
+
+.product{
+  background:rgba(255,240,248,.9);
+  border:3px solid #ffd1e8;
+  border-radius:30px;
+  padding:18px;
+  text-align:center;
+  cursor:pointer;
+  transition:.4s;
+}
+.product:hover{
+  transform:translateY(-6px);
+}
+
+.product img{
+  width:90%;
+  border-radius:25px;
+  border:3px dashed #ffb6d9;
+}
+
+.product h3{margin-top:12px;}
+.price{color:#ff6fae;font-weight:600;}
+
+/* ===== DESCRIPTION PANEL ===== */
+.desc-panel{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  width:340px;
+  background:#fff0f6;
+  border-radius:30px;
+  padding:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  display:none;
+  z-index:20;
+}
+
+.desc-panel.left{left:20px;}
+.desc-panel.right{right:20px;}
+
+.desc-panel h2{
+  font-family:'Allura',cursive;
+  font-size:38px;
+  color:#b388eb;
+}
+
+.desc-panel p{
+  margin:10px 0;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.buy{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:#f8c8dc;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.close{
+  margin-top:10px;
+  text-align:center;
+  font-size:13px;
+  color:#9c6cff;
+  cursor:pointer;
+}
+
+/* ===== PURCHASE FORM ===== */
+#purchase{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:30;
+  justify-content:center;
+  align-items:center;
+}
+
+.form-box{
+  background:#fff0f6;
+  padding:25px;
+  border-radius:30px;
+  width:300px;
+  text-align:center;
+}
+
+.form-box h3{
+  font-family:'Allura',cursive;
+  font-size:34px;
+  color:#b388eb;
+}
+
+.form-box input,
+.form-box select{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:15px;
+  border:1px solid #ffd1e8;
+}
+
+.form-box button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:#f8c8dc;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<button class="back" onclick="location.href='index.html'">← Back</button>
+
+<header>
+  <h1>Accessories Collection</h1>
+</header>
+
+<div class="products">
+  <div class="product" onclick="showDesc(0)">
+    <img src="acc1.jpg">
+    <h3>Swan Ballet Hand Mirror</h3>
+    <div class="price">RM39.00</div>
+  </div>
+
+  <div class="product" onclick="showDesc(1)">
+    <img src="acc2.jpg">
+    <h3>Strawberry Cupid Hand Mirror</h3>
+    <div class="price">RM33.00</div>
+  </div>
+
+  <div class="product" onclick="showDesc(2)">
+    <img src="acc3.jpg">
+    <h3>Violet Strawberry Rococo</h3>
+    <div class="price">RM29.00</div>
+  </div>
+
+  <div class="product" onclick="showDesc(3)">
+    <img src="acc4.jpg">
+    <h3>Butterfly Cloud</h3>
+    <div class="price">RM25.00</div>
+  </div>
+
+  <!-- NEW PRODUCT 5 -->
+  <div class="product" onclick="showDesc(4)">
+    <img src="acc5.jpg">
+    <h3>Angel Heart Hand Mirror</h3>
+    <div class="price">RM35.00</div>
+  </div>
+
+  <!-- NEW PRODUCT 6 -->
+  <div class="product" onclick="showDesc(5)">
+    <img src="acc6.jpg">
+    <h3>Dream Brush</h3>
+    <div class="price">RM22.00</div>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<div id="desc" class="desc-panel">
+  <h2 id="dTitle"></h2>
+  <p id="dText"></p>
+  <button class="buy" onclick="openForm()">BUY NOW</button>
+  <div class="close" onclick="closeDesc()">Close</div>
+</div>
+
+<!-- PURCHASE FORM -->
+<div id="purchase">
+  <div class="form-box">
+    <h3>Purchase</h3>
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone Number">
+    <input id="address" placeholder="Address">
+    <select id="payment">
+      <option>Online Banking</option>
+      <option>Credit Card</option>
+      <option>E-Wallet</option>
+    </select>
+    <button onclick="submitPurchase()">Submit</button>
+  </div>
+</div>
+
+<script>
+const products=[
+  {name:"Swan Ballet Hand Mirror",desc:"Elegant swan design with a classic, graceful touch."},
+  {name:"Strawberry Cupid Hand Mirror",desc:"Cute strawberry-themed mirror with a playful charm."},
+  {name:"Violet Strawberry Rococo",desc:"Dreamy violet accessory with a sweet rococo aesthetic."},
+  {name:"Butterfly Cloud",desc:"Soft, whimsical design inspired by clouds and butterflies."},
+  {name:"Angel Heart Hand Mirror",desc:"Heart-shaped mirror with angelic details for a princess look."},
+  {name:"Dream Brush",desc:"Romantic dream brush to complete your soft makeup."}
+];
+
+function showDesc(i){
+  let p=document.getElementById("desc");
+  p.className="desc-panel "+(i%2==0?"left":"right");
+  dTitle.innerText=products[i].name;
+  dText.innerText=products[i].desc;
+  p.style.display="block";
+}
+
+function closeDesc(){
+  document.getElementById("desc").style.display="none";
+}
+
+function openForm(){
+  document.getElementById("purchase").style.display="flex";
+}
+
+function submitPurchase(){
+  alert("Thank you for purchasing 💕");
+  document.getElementById("purchase").style.display="none";
+  document.getElementById("desc").style.display="none";
+  document.querySelectorAll("input").forEach(i=>i.value="");
+}
+</script>
+
+</body>
+</html>
+

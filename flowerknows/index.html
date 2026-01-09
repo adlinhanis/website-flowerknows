@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flower Knows</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Quicksand',sans-serif;
+}
+
+body{
+  background:url("wallpaper.jpg") center/cover no-repeat fixed;
+  overflow-x:hidden;
+  cursor:url("lipstick-cursor.jpg"), auto;
+}
+
+/* ===== CURTAIN ===== */
+#curtain-left,#curtain-right{
+  position:fixed;
+  top:0;width:50%;height:100%;
+  z-index:9999;
+}
+#curtain-left{
+  left:0;
+  background:url("curtain-left.png") center/cover no-repeat;
+  animation:leftOpen 5s forwards;
+}
+#curtain-right{
+  right:0;
+  background:url("curtain-right.png") center/cover no-repeat;
+  animation:rightOpen 5s forwards;
+}
+@keyframes leftOpen{to{transform:translateX(-100%);}}
+@keyframes rightOpen{to{transform:translateX(100%);}}
+
+/* ===== SPARKLE ===== */
+.sparkle{
+  position:fixed;
+  width:4px;height:4px;
+  background:#e0b3ff;
+  border-radius:50%;
+  pointer-events:none;
+  animation:spark 5s linear forwards;
+}
+@keyframes spark{
+  to{opacity:0;transform:translateY(-90px);}
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:white;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  padding:18px 20px;
+  text-align:center;
+}
+
+header h1{
+  font-family:'Allura',cursive;
+  font-size:70px;
+  color:#9b5de5;
+  text-shadow:2px 2px 6px rgba(0,0,0,.25);
+}
+
+/* ===== SEARCH ===== */
+.search-box{margin-top:20px;}
+.search-box input{
+  padding:12px;width:260px;
+  border-radius:30px;border:none;
+}
+.search-box button{
+  padding:12px 25px;
+  border:none;border-radius:30px;
+  background:#d9b3ff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* ===== MENU ===== */
+.menu{margin-top:30px;}
+.menu span{
+  display:inline-block;
+  margin:8px;
+  padding:8px 20px;
+  border:2px solid #d6c1ff;
+  border-radius:25px;
+  font-weight:600;
+  color:#fff;
+  background:rgba(155,93,229,0.45);
+  cursor:pointer;
+}
+
+/* ===== PRODUCT CATEGORY ===== */
+#productList{
+  display:none;
+  margin-top:20px;
+  text-align:center;
+}
+.product-card{
+  display:inline-block;
+  margin:10px;
+  padding:18px 22px;
+  border-radius:18px;
+  background:#f3e8ff;
+  color:#6a4c93;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,.15);
+  transition:.5s;
+}
+.product-card:hover{
+  transform:translateY(-6px);
+}
+
+/* ===== SLIDER ===== */
+.slider{
+  width:100%;
+  overflow:hidden;
+  margin:60px 0;
+}
+.track{
+  display:flex;
+  width:calc(260px * 16);
+  animation:scroll 25s linear infinite;
+}
+.track img{
+  width:220px;
+  margin:0 10px;
+  border-radius:25px;
+  border:3px solid #e5d4ff;
+}
+.product-display{
+  width:220px;
+  margin:0 12px;
+  text-align:center;
+}
+.product-display img{
+  width:100%;
+  border-radius:25px;
+  border:3px solid #e5d4ff;
+  transition:.4s ease;
+}
+.product-display img:hover{
+  transform:scale(1.15);
+}
+.product-display p{
+  margin-top:8px;
+  font-size:14px;
+  font-weight:600;
+  color:#FFFFFF;
+  letter-spacing:1px;
+}
+
+@keyframes scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ===== CUSTOMER SERVICE ===== */
+#chat{
+  position:fixed;
+  bottom:20px;right:20px;
+  z-index:999;
+}
+#chat button{
+  padding:10px 18px;
+  border:none;border-radius:25px;
+  background:#e0c3ff;
+  font-weight:600;
+  cursor:pointer;
+}
+#chatbox{
+  display:none;
+  width:300px;
+  background:#fff0ff;
+  border-radius:20px;
+  padding:15px;
+  margin-top:8px;
+}
+.option{
+  background:#e0c3ff;
+  padding:8px;border-radius:15px;
+  margin:6px 0;cursor:pointer;
+  font-size:13px;
+}
+#chatbox input{
+  width:100%;
+  padding:8px;
+  border-radius:15px;
+  border:1px solid #ccc;
+}
+.back{
+  margin-top:8px;
+  font-size:12px;
+  color:#7b5cff;
+  cursor:pointer;
+}
+
+/* ===== CURSOR BLING ===== */
+.cursor-blink{
+  position:fixed;
+  width:6px;height:6px;
+  background:#f3c4ff;
+  border-radius:50%;
+  pointer-events:none;
+  animation:blink 1s linear forwards;
+}
+@keyframes blink{
+  to{opacity:0;transform:scale(2);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="curtain-left"></div>
+<div id="curtain-right"></div>
+
+<header>
+  <h1>Flower Knows</h1>
+
+  <div class="search-box">
+    <input id="search" placeholder="Search products..."
+      onkeydown="if(event.key==='Enter')searchProduct()">
+    <button onclick="searchProduct()">Search</button>
+  </div>
+
+  <div class="menu">
+    <span onclick="location.href='aboutus.html'">About Us</span>
+    <span onclick="toggleProducts()">Products</span>
+    <span onclick="location.href='promotion.html'">Promotion</span>
+
+    <!-- collaboration → jump to #collab -->
+    <span onclick="location.href='collaboration.html#collab'">Collaboration</span>
+
+    <!-- contact → jump to #contact -->
+    <span onclick="location.href='collaboration.html#contact'">Contact</span>
+</div>
+
+</header>
+
+<div id="productList">
+  <div class="product-card" onclick="location.href='lippies.html'">Lippies</div>
+  <div class="product-card" onclick="location.href='blusher.html'">Blusher</div>
+  <div class="product-card" onclick="location.href='eyeshadow.html'">Eyeshadow</div>
+  <div class="product-card" onclick="location.href='accessories.html'">Accessories</div>
+</div>
+
+<!-- SLIDER WITH DESCRIPTION -->
+<div class="slider">
+  <div class="track">
+
+    <div class="product-display">
+      <img src="p1.jpg">
+      <p>#blusher</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p2.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p3.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p4.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p5.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p6.jpg">
+      <p>#eyeshadow</p>
+      </div>
+
+<!-- DUPLICATE IMAGE -->
+<div class="product-display">
+ <img src="p1.jpg">
+      <p>#blusher</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p2.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p3.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p4.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p5.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p6.jpg">
+      <p>#eyeshadow</p>
+      </div>
+
+<!-- DUPLICATE IMAGE -->
+<div class="product-display">
+ <img src="p1.jpg">
+      <p>#blusher</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p2.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p3.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p4.jpg">
+      <p>#lippies</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p5.jpg">
+      <p>#accessories</p>
+    </div>
+
+    <div class="product-display">
+      <img src="p6.jpg">
+      <p>#eyeshadow</p>
+      </div>
+
+
+  </div>
+</div>
+
+<!-- CUSTOMER SERVICE -->
+<div id="chat">
+  <button onclick="openChat()">Customer Service</button>
+  <div id="chatbox">
+    <div id="chatContent"></div>
+  </div>
+</div>
+
+<script>
+/* sparkles */
+setInterval(()=>{
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*innerWidth+"px";
+  s.style.top=innerHeight+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),3000);
+},100);
+
+/* cursor bling */
+document.addEventListener("mousemove",e=>{
+  let b=document.createElement("div");
+  b.className="cursor-blink";
+  b.style.left=e.clientX+"px";
+  b.style.top=e.clientY+"px";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),800);
+});
+
+/* search */
+function searchProduct(){
+  let q=document.getElementById("search").value.toLowerCase();
+  if(q.includes("lip")) location.href="lippies.html";
+  else if(q.includes("eye")) location.href="eyeshadow.html";
+  else if(q.includes("blush")) location.href="blusher.html";
+  else if(q.includes("access")) location.href="accessories.html";
+  else alert("No item found");
+}
+
+/* product menu */
+function toggleProducts(){
+  let p=document.getElementById("productList");
+  p.style.display=p.style.display==="block"?"none":"block";
+}
+
+/* CHAT SYSTEM */
+function openChat(){
+  document.getElementById("chatbox").style.display="block";
+  showOptions();
+}
+
+function showOptions(){
+  document.getElementById("chatContent").innerHTML=`
+    <p><b>Bot 🌸:</b> Hi! How can we help you today?</p>
+    <div class="option" onclick="connect()">Refund / Return</div>
+    <div class="option" onclick="connect()">Item not received</div>
+    <div class="option" onclick="connect()">Product enquiry</div>
+    <div class="option" onclick="connect()">Other questions</div>
+  `;
+}
+
+/* REPLACED WITH YOUR ADVANCED VERSION */
+function connect(){
+  document.getElementById("chatContent").innerHTML=`
+    <p><b>Bot 🌸:</b> Please wait, our staff will be with you shortly…</p>
+  `;
+
+  setTimeout(()=>{
+    document.getElementById("chatContent").innerHTML=`
+      <p><b>Ellen 🌷:</b> Hi, I'm Ellen. May I help you?</p>
+      <div id="typing" style="font-size:12px;color:#999;">Ellen is typing...</div>
+      <input id="userMsg" placeholder="Type your message here..." 
+        onkeydown="if(event.key==='Enter')sendMsg()">
+      
+      <div class="option" onclick="quickReply('delivery')">📦 Delivery Status</div>
+      <div class="option" onclick="quickReply('product')">💄 Product Recommendation</div>
+      <div class="option" onclick="quickReply('payment')">💳 Payment & Refund</div>
+      <div class="option" onclick="quickReply('promo')">🎀 Current Promotion</div>
+
+      <div class="back" onclick="showOptions()">← Back</div>
+    `;
+    document.getElementById("typing").style.display="none";
+  },2000);
+}
+
+function sendMsg(){
+  let msg=document.getElementById("userMsg").value.toLowerCase();
+  let reply="Thank you for reaching out 💗";
+
+  if(msg.includes("refund")||msg.includes("return")){
+    reply="Our refund process takes 3–5 working days after item inspection 🌸";
+  } 
+  else if(msg.includes("delivery")||msg.includes("track")){
+    reply="Please allow 2–5 working days for delivery. Tracking will be updated soon 📦";
+  }
+  else if(msg.includes("price")||msg.includes("harga")){
+    reply="All prices are listed on our product pages. Promo may apply 🎀";
+  }
+  else{
+    reply="Thank you for your message 💕 Our team will assist you shortly.";
+  }
+
+  document.getElementById("chatContent").innerHTML += `
+    <p><b>You:</b> ${msg}</p>
+    <p><b>Ellen 🌷:</b> ${reply}</p>
+    <p style="font-size:12px;color:#999;">Is there anything else I can help you with?</p>
+  `;
+  document.getElementById("userMsg").value="";
+}
+
+function quickReply(type){
+  let msg="";
+  if(type==="delivery") msg="I want to check my delivery status";
+  if(type==="product") msg="Can you recommend a product?";
+  if(type==="payment") msg="I have a payment or refund question";
+  if(type==="promo") msg="Any promotion available now?";
+  document.getElementById("userMsg").value=msg;
+}</script>
+
+</body>
+</html>
